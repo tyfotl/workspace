@@ -24,6 +24,9 @@ TODO:
     21)Print decimal to binary , binary to decimal
 '''
 
+from time import time
+import timeit
+
 def maxf():
     x = int(input("How many numbers? "))
     k=[]
@@ -31,29 +34,23 @@ def maxf():
         j = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth', 'eleventh', 'twelfth', 'thirteenth', 'fourteenth', 'fifteenth', 'sixteenth', 'seventeenth', 'eighteenth', 'nineteenth', 'twentieth', 'twenty-first', 'twenty-second', 'twenty-third', 'twenty-fourth', 'twenty-fifth', 'twenty-sixth', 'twenty-seventh', 'twenty-eighth', 'twenty-ninth', 'thirtieth']
         k.append(float(input("Enter "+ j[i] + " number: ")))
     return max(k)
-
 def lycheck(y):
     if y%4==0 and ( y%100!=0 or y%400==0):
         print(y, "is a leap year")
     else:
         print(y, "is not a leap year")
-
 def positive_or_negative(x):
     if x > 0:
         print(x, "is positive")
     elif x < 0:
         print(x, "is negative")
     else: print(x, "is neither positive nor negative")
-
 def oddeve(x):
     if x%2==0: print(x, "is even")
     elif x%2==1: print(x, "is odd")
-
 def multipleornot(x,y):
     if x%y==0: print(x,"is a multiple of",y)
     else: print(x, "is not a multiple of", y)
-
-
 def menucalc():
     import operator
     operations = {
@@ -73,7 +70,6 @@ def menucalc():
     if n2==0 and ( op=='/' or op =='%' or op =='//' ):
         return "Division by zero"
     return operations[op](n1, n2)
-
 def tempconv():
     units = {
             "c": "Celsius",
@@ -105,5 +101,45 @@ def tempconv():
     if result%1==0:
         result = int(result)
     return f"{temp}\u00b0 {fromUnit.title()} is {result}\u00b0 in {units[toUnit].title()}"
-
-print(tempconv())
+def tableNo():
+    x = int(input("Enter the number: "))
+    for i in range(10):
+        print(f"{x} * {i+1} = {x*(i+1)}")
+    return  ""
+def fibtonterms():
+    a = -1
+    b = 1
+    for i in range(int(input("How many fibonacci terms? "))):
+        c = a + b
+        a = b
+        b = c
+        print(c)
+    return ""
+def fibuptoanumber():
+    a = -1
+    b = 1
+    limit = int(input("Enter the number upto which you need fibonacci series: "))
+    while (a + b) <= limit:
+        c = a + b
+        a = b
+        b = c
+        print(c)
+    return ""
+def factorials(n):
+    result = 1
+    for i in range(n):
+        result = result * (i + 1)
+    return result
+def frec(n):
+    if n > 1:
+        return n * frec(n - 1)
+    else:
+        return 1
+def sumofdigits():
+    x = int(input("Enter the number"))
+    sumofdigits = 0
+    while x > 0:
+        sumofdigits += x % 10
+        x = x // 10
+    return sumofdigits
+print(sumofdigits())
