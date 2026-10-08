@@ -1,3 +1,7 @@
 __pycache__/
 .pytest_cache/
 cs50x/lecs
+.ignored/
+cs50/
+infra/.env
+infra/Caddyfile
