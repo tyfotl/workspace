@@ -1,7 +1,3 @@
 __pycache__/
 .pytest_cache/
-docker
-#docker/antigravity
-#docker/navidrome
-#docker/searxng
-cs50/lecs
+cs50x/lecs

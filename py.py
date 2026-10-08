@@ -24,8 +24,8 @@ TODO:
     21)Print decimal to binary , binary to decimal
 '''
 
-from time import time
-import timeit
+from posix import remove
+
 
 def maxf():
     x = int(input("How many numbers? "))
@@ -136,10 +136,29 @@ def frec(n):
     else:
         return 1
 def sumofdigits():
-    x = int(input("Enter the number"))
+    x = int(input("Enter the number: "))
     sumofdigits = 0
     while x > 0:
         sumofdigits += x % 10
         x = x // 10
     return sumofdigits
-print(sumofdigits())
+def sumoddneve():
+    n = int(input("Sum upto which number? "))
+    sumeve = 0
+    sumodd = 0
+    for i in range(n):
+        if (i+1)%2==0:
+            sumeve += i+1
+        elif (i+1)%2==1:
+            sumodd += i+1
+    return f"Even sum is {sumeve} and odd sum is {sumodd}"
+def maxnumfromdigits():
+    nod = int(input("How many digits? "))
+    digl = []
+    num = 0
+    for i in range(nod):
+        digl.append(f"Enter {i+1}th digit")
+    for i in range(nod):
+        num += max(digl)*10**(nod-(i+1),
+        digl.remove(max(digl)),
+    return num

@@ -1,0 +1,55 @@
+services:
+
+  navidrome:
+    image: deluan/navidrome:latest
+    container_name: navidrome
+    restart: unless-stopped
+    environment:
+      ND_BASEURL: "https://navidrome.tyfotl"
+      ND_SCANSCHEDULE: 1h
+      ND_LOGLEVEL: info
+      ND_ENABLEINSIGHTSCOLLECTOR: "false"
+      ND_ENABLEEXTERNALSERVICES: "false"
+    user: "1003:1007"
+    volumes:
+      - "./navidrome/data:/data"
+      - "/srv/music:/music:ro"
+
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    user: "1003:1007"
+    # ports:
+      # - "8096:8096" # HTTP
+      # - "8920:8920" # Optional: HTTPS
+    environment:
+      - TZ=Asia/Kolkata
+    volumes:
+      - "./jellyfin/config:/config"
+      - "./jellyfin/cache:/cache"
+      - "/srv/music:/music:ro"
+      - "/srv/watch:/watch:ro"
+    restart: unless-stopped
+
+  core:
+    container_name: searxng-core
+    image: docker.io/searxng/searxng:${SEARXNG_VERSION:-latest}
+    restart: always
+    # ports:
+      # - ${SEARXNG_HOST:+${SEARXNG_HOST}:}${SEARXNG_PORT:-8080}:${SEARXNG_PORT:-8080}
+    env_file: ./.env
+    volumes:
+      - ./searxng/core-config/:/etc/searxng/
+      - ./searxng/core-data/:/var/cache/searxng/
+    depends_on:
+      - valkey
+
+  valkey:
+    container_name: searxng-valkey
+    image: docker.io/valkey/valkey:9-alpine
+    command: valkey-server --save 30 1 --loglevel warning
+    restart: always
+    volumes:
+      - ./searxng/valkey-data/:/data/
+
+
